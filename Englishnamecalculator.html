@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter to Number Conversion</title>
+</head>
+<body>
+    <h3>請輸入英文字母：</h3>
+    <input type="text" id="inputString" placeholder="輸入英文字母" />
+    <button onclick="convert()">轉換並計算</button>
+    <p id="result"></p>
+
+    <script>
+        function letterToNumber(char) {
+            const mapping = {
+                'a': 1, 'j': 1, 's': 1, 'A': 1, 'J': 1, 'S': 1,
+                'b': 2, 'k': 2, 't': 2, 'B': 2, 'K': 2, 'T': 2,
+                'c': 3, 'l': 3, 'u': 3, 'C': 3, 'L': 3, 'U': 3,
+                'd': 4, 'm': 4, 'v': 4, 'D': 4, 'M': 4, 'V': 4,
+                'e': 5, 'n': 5, 'w': 5, 'E': 5, 'N': 5, 'W': 5,
+                'f': 6, 'o': 6, 'x': 6, 'F': 6, 'O': 6, 'X': 6,
+                'g': 7, 'p': 7, 'y': 7, 'G': 7, 'P': 7, 'Y': 7,
+                'h': 8, 'q': 8, 'z': 8, 'H': 8, 'Q': 8, 'Z': 8,
+                'i': 9, 'r': 9, 'I': 9, 'R': 9
+            };
+            return mapping[char] || 0;
+        }
+
+        function sumDigits(num) {
+            while (num >= 10) {
+                num = num.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+            }
+            return num;
+        }
+
+        function convertLettersToNumberSum(inputString) {
+            let totalSum = 0;
+            for (let char of inputString) {
+                totalSum += letterToNumber(char);
+            }
+            return sumDigits(totalSum);
+        }
+
+        function convert() {
+            const inputString = document.getElementById("inputString").value;
+            const result = convertLettersToNumberSum(inputString);
+            document.getElementById("result").textContent = `最終個位數為: ${result}`;
+        }
+    </script>
+</body>
+</html>
